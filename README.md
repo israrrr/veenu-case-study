@@ -2,8 +2,8 @@
 
 A high-performance, interactive web-based case study showcasing the rebranding of **VEENU**, a highway restaurant in India. This project demonstrates the intersection of **strategic design** and **immersive web development**.
 
-![VEENU Hero Preview](vcr1.png)
-*(Note: Replace the image path above if your hero image has a different name in the repo)*
+<!--![VEENU Hero Preview](vcr1.png)
+*(Note: Replace the image path above if your hero image has a different name in the repo)*-->
 
 ## 🚀 Overview
 
