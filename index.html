@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Case Study for VEENU - A strategic brand identity project by Israr Ahmed.">
+    <title>VEENU Case Study - Israr Ahmed</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-saffron': '#f28c28',
+                        'brand-brown': '#4A3B32',
+                        'brand-green': '#15803D',
+                        'brand-beige': '#FDFBF7',
+                        'brand-clay': '#A8A29E',
+                        'brand-cream': '#FEFCE8',
+                        'brand-red': '#B91C1C',
+                    },
+                    maxWidth: {
+                        'read': '65ch', /* Optimal reading width */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            /* Native smooth scroll for anchor links */
+            scroll-behavior: smooth; 
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Utility for hiding elements before animation loads to prevent flashing */
+        .reveal-text,
+        .reveal-card,
+        .reveal-image,
+        .hero-stagger {
+            visibility: hidden;
+        }
+
+        /* SVG Setup */
+        .logo-path {
+            fill: transparent;
+            stroke: #f28c28;
+            stroke-width: 2px;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+
+        /* Graph Animation */
+        .graph-line {
+            fill: none;
+            stroke: #f28c28;
+            stroke-width: 4px;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Smart Image Fitting & Fallbacks */
+        .img-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            background-color: #e5e7eb; /* Placeholder color */
+        }
+
+        .smart-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .img-fallback {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 0;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Animation Initials */
+        #final-smile {
+            opacity: 0;
+            transform-origin: center;
+        }
+
+        .cls-2 {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-brand-beige text-brand-brown selection:bg-brand-saffron selection:text-white flex flex-col min-h-screen">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-beige/95 backdrop-blur-md border-b border-brand-brown/5 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+            <a href="#top" aria-label="Go to top" class="text-xl font-display font-black tracking-wider text-brand-saffron hover:opacity-80 transition cursor-pointer flex items-center gap-2">
+                ISRAR AHMED
+            </a>
+            <div class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest text-brand-brown/70">
+                <a href="#challenge" class="group relative hover:text-brand-saffron transition duration-300">
+                    Challenge<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-saffron transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#concept" class="group relative hover:text-brand-saffron transition duration-300">
+                    Strategy<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-saffron transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#system" class="group relative hover:text-brand-saffron transition duration-300">
+                    Visuals<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-saffron transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#impact" class="group relative hover:text-brand-saffron transition duration-300">
+                    Impact<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-saffron transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="top" class="relative w-full min-h-screen flex items-end pb-16 md:pb-24 px-6 md:px-12 pt-24 overflow-hidden">
+        <div class="absolute inset-0 z-0 bg-brand-brown img-container h-full">
+            <div class="img-fallback">Hero Background</div>
+            <img src="assets/vcr1.webp" alt="VEENU Exterior" class="hero-bg smart-img opacity-60 mix-blend-overlay" onerror="this.style.opacity='0'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-100 z-20"></div>
+        </div>
+
+        <div class="relative z-30 w-full max-w-7xl mx-auto text-white">
+            <div class="hero-stagger inline-flex items-center gap-3 mb-6 bg-black/30 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 w-fit">
+                <span class="w-2 h-2 rounded-full bg-brand-saffron animate-pulse"></span>
+                <span class="text-brand-saffron font-bold text-xs tracking-[0.2em] uppercase">Brand Identity & Strategy</span>
+            </div>
+
+            <h1 class="hero-stagger text-[15vw] md:text-[13vw] font-display font-black mb-8 leading-[0.85] tracking-tight">
+                VEENU<br>
+                <span class="text-3xl md:text-5xl font-light text-gray-300 block mt-4 tracking-[0.1em] uppercase">
+                    Cafe & Restaurant
+                </span>
+            </h1>
+
+            <div class="hero-stagger max-w-2xl border-l-4 border-brand-saffron pl-6 md:pl-8">
+                <p class="text-lg md:text-2xl font-light leading-relaxed text-gray-100 max-w-read">
+                    Food That Feels Like Home, Even When You're Miles Away.
+                </p>
+                <p class="text-xs font-bold text-brand-saffron mt-4 tracking-widest uppercase opacity-90">
+                    Betma - Indore Bypass | 2023
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section id="challenge" class="py-24 md:py-32 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <div class="order-2 lg:order-1 flex flex-col justify-center">
+                <span class="reveal-text text-brand-saffron font-bold text-xs tracking-[0.2em] uppercase mb-4 block">The Context</span>
+                <h2 class="reveal-text text-4xl md:text-5xl font-display font-black mb-10 leading-tight text-brand-brown">
+                    From Café To <br> Highway Contender
+                </h2>
+
+                <div class="space-y-8">
+                    <div class="reveal-text bg-gray-50 p-6 rounded-xl border-l-4 border-brand-brown">
+                        <h3 class="font-bold text-brand-brown mb-2 text-sm uppercase tracking-wide">The Problem</h3>
+                        <p class="text-gray-600 leading-relaxed max-w-read">
+                            How does an unproven restaurant divert highway traffic from a decade-old incumbent? 
+                            <strong class="text-brand-brown">How do we steal the spotlight?</strong>
+                        </p>
+                    </div>
+
+                    <div class="reveal-text">
+                        <h3 class="font-bold text-brand-brown mb-4 text-sm uppercase tracking-wide">Key Insights</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-4 text-gray-600">
+                                <span class="w-2 h-2 bg-brand-saffron rounded-full shrink-0"></span>Honor mother's name authentically.
+                                <strong class="text-brand-brown">(VISHNU)</strong>
+                            </li>
+                            <li class="flex items-center gap-4 text-gray-600">
+                                <span class="w-2 h-2 bg-brand-saffron rounded-full shrink-0"></span>Direct competition with a 10-year incumbent.
+                            </li>
+                            <li class="flex items-center gap-4 text-gray-600">
+                                <span class="w-2 h-2 bg-brand-saffron rounded-full shrink-0"></span>Needs bold form readable at 80 km/h.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2 h-full reveal-image">
+                <div class="aspect-[4/5] bg-gray-100 rounded-2xl overflow-hidden shadow-2xl relative border border-gray-100 h-full group img-container">
+                    <video src="assets/vertical.webm" autoplay muted loop playsinline class="parallax-img smart-img"></video>
+                    <div class="absolute bottom-8 right-8 bg-white/95 backdrop-blur px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg text-brand-brown z-20">
+                        Highway Context
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="concept" class="py-24 md:py-32 px-6 md:px-12 bg-brand-beige border-y border-brand-brown/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-text">
+                <span class="text-brand-saffron font-bold text-xs tracking-[0.2em] uppercase mb-4 block">Strategic Core</span>
+                <h2 class="text-4xl md:text-5xl font-display font-black mb-6 text-brand-brown">The Concept: <span class="text-brand-saffron">V-EEN-U</span></h2>
+                <p class="text-xl leading-relaxed text-gray-600 font-light max-w-read mx-auto">
+                    The name itself was the strategy. <span class="text-brand-saffron">"V-EEN-U"</span> honors the founder's mother, 
+                    but phonetically structures the brand promise <span class="text-brand-saffron">(We + Connection + You)</span>.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="reveal-card bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-brand-brown/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-6 right-6 text-xs font-bold text-brand-saffron uppercase tracking-widest bg-brand-beige px-3 py-1 rounded-full">
+                        Live Concept
+                    </div>
+                    <div class="aspect-square bg-brand-brown/5 rounded-2xl flex items-center justify-center mb-8 border border-brand-brown/10 p-12">
+                        <svg id="veenu-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150.47 88.15" class="w-full h-full">
+                            <g>
+                                <path class="logo-path" d="M63.46,63.46,75.24,75.24a44.08,44.08,0,1,1,0-62.33L24.68,63.46a27.43,27.43,0,0,0,38.78,0Z" />
+                                <path class="logo-path" d="M87,24.68,75.24,12.91a44.08,44.08,0,1,1,0,62.33l50.55-50.56a27.43,27.43,0,0,0-38.78,0Z" />
+                            </g>
+                        </svg>
+                    </div>
+                    <ul class="text-sm space-y-4 text-brand-brown font-medium mt-auto">
+                        <li class="flex gap-4 items-center bg-brand-beige/50 p-3 rounded-lg"><span class="w-2 h-2 rounded-full bg-brand-saffron shrink-0"></span> Two inverted mirrored 'e' shapes (Connection)</li>
+                        <li class="flex gap-4 items-center bg-brand-beige/50 p-3 rounded-lg"><span class="w-2 h-2 rounded-full bg-brand-saffron shrink-0"></span> Continuous outline = Infinity (∞ - Trust)</li>
+                    </ul>
+                </div>
+
+                <div class="reveal-card bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-brand-brown/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
+                    <div class="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden mb-8 border border-gray-100 relative img-container">
+                        <img src="assets/v-een-u.webp" alt="Phonetic Breakdown" class="smart-img opacity-90" loading="lazy" onerror="this.style.opacity='0'">
+                    </div>
+                    <div class="grid grid-cols-3 text-center text-sm font-bold border-t pt-8 border-gray-100 text-brand-brown mt-auto">
+                        <div class="px-2">V (we)<br><span class="text-gray-400 font-normal mt-2 block text-[10px] uppercase tracking-wider">Legacy</span></div>
+                        <div class="px-2 border-x border-gray-100">EEN (and)<br><span class="text-gray-400 font-normal mt-2 block text-[10px] uppercase tracking-wider">Connection</span></div>
+                        <div class="px-2">U (you)<br><span class="text-gray-400 font-normal mt-2 block text-[10px] uppercase tracking-wider">Guest</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="system" class="py-24 md:py-32 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-20 border-b border-gray-100 pb-10 reveal-text">
+                <h2 class="text-4xl md:text-5xl font-display font-black text-brand-brown">Visual System</h2>
+                <p class="text-xl text-gray-500 mt-6 max-w-3xl font-light">
+                    <strong class="text-brand-brown">Bold + Simple</strong> = <strong class="text-brand-saffron">Functional + Memorable</strong>
+                </p>
+            </div>
+
+            <div class="mb-24">
+                <h3 class="reveal-text text-sm font-bold mb-8 uppercase tracking-[0.2em] text-brand-saffron flex items-center gap-4">
+                    <span class="w-12 h-[1px] bg-brand-saffron"></span> 01. Typography
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="reveal-card bg-[#1a1a1a] text-white p-10 md:p-16 rounded-3xl relative overflow-hidden shadow-2xl group flex flex-col h-full hover:-translate-y-1 transition duration-300 min-h-[500px]">
+                        <div class="absolute inset-0 z-0 opacity-50 transition duration-700 group-hover:scale-105 img-container h-full">
+                            <img src="assets/vcr2.webp" alt="Montserrat Font" class="smart-img" loading="lazy" onerror="this.style.opacity='0'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+                        </div>
+                        <div class="relative z-20 flex flex-col h-full">
+                            <div class="flex justify-between items-start mb-16">
+                                <h4 class="font-display font-black text-8xl md:text-9xl tracking-tighter">Aa</h4>
+                                <span class="text-[10px] font-bold border border-white/20 px-4 py-2 rounded-full uppercase tracking-wider bg-white/5 backdrop-blur-sm">Primary</span>
+                            </div>
+                            <div class="mt-auto">
+                                <p class="font-display font-bold text-3xl mb-2">Montserrat</p>
+                                <p class="text-gray-400 font-light mb-4">Bold | Geometric | Modern</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal-card bg-brand-beige text-brand-brown border border-brand-brown/10 p-10 md:p-16 rounded-3xl relative overflow-hidden group flex flex-col h-full hover:-translate-y-1 transition duration-300 min-h-[500px]">
+                        <div class="absolute inset-0 z-0 opacity-40 transition duration-700 group-hover:scale-105 img-container h-full">
+                            <img src="assets/vcr3.webp" alt="Lato Font" class="smart-img" loading="lazy" onerror="this.style.opacity='0'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-beige via-transparent to-transparent z-10"></div>
+                        </div>
+                        <div class="relative z-20 flex flex-col h-full">
+                            <div class="flex justify-between items-start mb-16">
+                                <h4 class="font-sans font-light text-8xl md:text-9xl tracking-tighter">Aa</h4>
+                                <span class="text-[10px] font-bold border border-brand-brown/20 px-4 py-2 rounded-full uppercase tracking-wider bg-brand-brown/5">Secondary</span>
+                            </div>
+                            <div class="mt-auto">
+                                <p class="font-sans text-3xl mb-2">Lato</p>
+                                <p class="text-gray-500 font-light mb-4">Humanist | Rounded | Approachable</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-24">
+                <h3 class="reveal-text text-sm font-bold mb-8 uppercase tracking-[0.2em] text-brand-saffron flex items-center gap-4">
+                    <span class="w-12 h-[1px] bg-brand-saffron"></span> 02. Color Strategy
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                    <div class="reveal-card group bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="h-48 w-full rounded-xl mb-6 shadow-inner overflow-hidden relative img-container">
+                            <img src="assets/Spice Saffron2.webp" alt="Spice Saffron" loading="lazy" class="smart-img group-hover:scale-110 transition duration-700" onerror="this.style.opacity='0'">
+                            <div class="absolute inset-0 bg-brand-saffron/50 mix-blend-multiply z-20"></div>
+                        </div>
+                        <div class="px-2">
+                            <h4 class="font-bold text-lg text-brand-brown">Spice Saffron</h4>
+                            <p class="text-xs text-gray-400 mt-1">Warmth & Energy</p>
+                        </div>
+                    </div>
+                    <div class="reveal-card group bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="h-48 w-full rounded-xl mb-6 shadow-inner overflow-hidden relative img-container">
+                            <img src="assets/Earthen Brown2.webp" alt="Earthen Brown" loading="lazy" class="smart-img group-hover:scale-110 transition duration-700" onerror="this.style.opacity='0'">
+                            <div class="absolute inset-0 bg-brand-brown/40 mix-blend-multiply z-20"></div>
+                        </div>
+                        <div class="px-2">
+                            <h4 class="font-bold text-lg text-brand-brown">Earthen Brown</h4>
+                            <p class="text-xs text-gray-400 mt-1">Tradition & Stability</p>
+                        </div>
+                    </div>
+                    <div class="reveal-card group bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="h-48 w-full rounded-xl mb-6 shadow-inner overflow-hidden relative img-container">
+                            <img src="assets/Leaf Green2.webp" alt="Leaf Green" loading="lazy" class="smart-img group-hover:scale-110 transition duration-700" onerror="this.style.opacity='0'">
+                            <div class="absolute inset-0 bg-brand-green/30 mix-blend-multiply z-20"></div>
+                        </div>
+                        <div class="px-2">
+                            <h4 class="font-bold text-lg text-brand-brown">Leaf Green</h4>
+                            <p class="text-xs text-gray-400 mt-1">Freshness & Growth</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-sm font-bold mb-8 uppercase tracking-[0.2em] text-brand-saffron flex items-center gap-4">
+                    <span class="w-12 h-[1px] bg-brand-saffron"></span> 03. Pattern System
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="group cursor-pointer reveal-card hover:-translate-y-1 transition duration-300">
+                        <div class="aspect-square bg-brand-brown rounded-2xl overflow-hidden relative mb-6 shadow-lg img-container">
+                            <img src="assets/pattern01.webp" alt="Dense Pattern" loading="lazy" class="smart-img opacity 60 mix-blend-overlay" onerror="this.style.opacity='0'">
+                            <div class="absolute bottom-4 left-4 text-white text-[10px] font-bold border border-white/30 px-3 py-1 rounded-full bg-black/20 backdrop-blur-sm uppercase tracking-wider z-20">
+                                Wall Texture
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-lg text-brand-brown">01. Dense</h4>
+                    </div>
+
+                    <div class="group cursor-pointer reveal-card hover:-translate-y-1 transition duration-300">
+                        <div class="aspect-square bg-brand-beige rounded-2xl overflow-hidden relative mb-6 shadow-lg border border-gray-100 img-container">
+                            <img src="assets/pattern02.webp" alt="Spaced Pattern" loading="lazy" class="smart-img opacity 60 mix-blend-multiply" onerror="this.style.opacity='0'">
+                            <div class="absolute bottom-4 left-4 text-brand-brown text-[10px] font-bold border border-brand-brown/10 px-3 py-1 rounded-full bg-white/60 backdrop-blur-sm uppercase tracking-wider z-20">
+                                Packaging
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-lg text-brand-brown">02. Flow</h4>
+                    </div>
+
+                    <div class="group cursor-pointer reveal-card hover:-translate-y-1 transition duration-300">
+                        <div class="aspect-square bg-brand-saffron rounded-2xl overflow-hidden relative mb-6 shadow-lg img-container">
+                            <img src="assets/pattern03.webp" alt="Linear Pattern" loading="lazy" class="smart-img opacity 60 mix-blend" onerror="this.style.opacity='0'">
+                            <div class="absolute bottom-4 left-4 text-white text-[10px] font-bold border border-white/30 px-3 py-1 rounded-full bg-black/10 backdrop-blur-sm uppercase tracking-wider z-20">
+                                Directional
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-lg text-brand-brown">03. Linear</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 md:py-32 px-0 bg-brand-brown text-brand-beige">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-display font-black mb-6">Implementation</h2>
+                <p class="text-xl opacity-80 max-w-read font-light">From brand guidelines to the napkin on the table.</p>
+            </div>
+            <div class="border-l border-brand-saffron pl-8 flex flex-col justify-center">
+                <strong class="text-brand-saffron uppercase tracking-widest text-xs mb-3 font-bold">Beyond Design</strong>
+                <p class="text-lg opacity-90 leading-relaxed font-light">"Embedded in operations for 6 months post-launch. Advised spatial layout, managed launch phase, and tracked metrics."</p>
+            </div>
+        </div>
+
+        <div class="w-full aspect-[21/9] bg-black mb-4 relative overflow-hidden group img-container">
+            <video src="assets/interior.webm" autoplay muted loop playsinline class="smart-img opacity-70 group-hover:opacity-80 transition duration-1000 group-hover:scale-105"></video>
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-20"></div>
+            <div class="absolute bottom-12 right-6 md:right-24 text-right text-white z-30">
+                <p class="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-saffron mb-3">We Say</p>
+                <p class="text-3xl md:text-5xl font-bold tracking-tight">Atithi Devo Bhava</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div class="aspect-[5/4] bg-white/5 rounded-2xl overflow-hidden relative group cursor-pointer border border-white/5 img-container">
+                <img src="assets/vcr-exterior.webp" alt="Tea Point" loading="lazy" class="smart-img opacity-60 group-hover:opacity-100 transition duration-500" onerror="this.style.opacity='0'">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/60 font-bold text-white tracking-widest uppercase text-sm z-20">Tea Point</div>
+            </div>
+            <div class="aspect-[5/4] bg-white/5 rounded-2xl overflow-hidden relative group cursor-pointer border border-white/5 img-container">
+                <video src="assets/logo-vid.webm" autoplay muted loop playsinline class="smart-img opacity-60 group-hover:opacity-100 transition duration-500"></video>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/60 font-bold text-white tracking-widest uppercase text-sm z-20">Logo</div>
+            </div>
+            <div class="aspect-[5/4] bg-white/5 rounded-2xl overflow-hidden relative group cursor-pointer border border-white/5 img-container">
+                <img src="assets/vcr-staff.webp" alt="Uniforms" loading="lazy" class="smart-img opacity-60 group-hover:opacity-100 transition duration-500" onerror="this.style.opacity='0'">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/60 font-bold text-white tracking-widest uppercase text-sm z-20">Uniforms</div>
+            </div>
+            <div class="aspect-[5/4] bg-white/5 rounded-2xl overflow-hidden relative group cursor-pointer border border-white/5 img-container">
+                <img src="assets/interior01.webp" alt="Interior" loading="lazy" class="smart-img opacity-60 group-hover:opacity-100 transition duration-500" onerror="this.style.opacity='0'">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/60 font-bold text-white tracking-widest uppercase text-sm z-20">Interior</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="py-24 md:py-32 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="reveal-text text-4xl md:text-5xl font-display font-black mb-20 text-brand-brown">The Impact</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+
+                <div class="flex flex-col justify-center reveal-text">
+                    <div class="flex items-baseline">
+                        <span id="counter" class="text-[6rem] md:text-[10rem] leading-none font-black text-brand-saffron tracking-tight">0</span>
+                        <span class="text-brand-saffron font-black text-6xl md:text-8xl lg:text-9xl">%</span>
+                    </div>
+
+                    <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-brown mb-8 mt-2">Footfall Increase</h3>
+                    <p class="text-xl text-gray-600 mb-12 max-w-read font-light">Tracked daily volume across 19-hour operations for 6 months.</p>
+
+                    <div class="w-full h-40 mt-8 opacity-90">
+                        <p class="text-xs font-bold text-brand-saffron mb-2 uppercase tracking-wide">Growth Trend</p>
+                        <svg class="w-full h-full" viewBox="0 0 100 50" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="graphGradient" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#D97706" stop-opacity="0.2" />
+                                    <stop offset="100%" stop-color="#D97706" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <path fill="url(#graphGradient)" d="M0,50 L0,40 L20,35 L40,25 L60,30 L80,10 L100,5 L100,50 Z" />
+                            <path class="graph-line" d="M0,40 L20,35 L40,25 L60,30 L80,10 L100,5" vector-effect="non-scaling-stroke" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative h-[500px] lg:h-auto bg-brand-brown/5 rounded-[2rem] shadow-2xl overflow-hidden flex items-center justify-center group border border-gray-100 p-12" id="smile-container">
+                    <div class="relative w-full h-full flex items-center justify-center" style="max-width: 400px; max-height: 400px;">
+                        
+                        <svg id="initial-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full absolute top-0 left-0">
+                            <g id="logo-parts" transform="translate(25, 56)">
+                                <path class="left-e" fill="#f28c28" d="M63.46,63.46,75.24,75.24a44.08,44.08,0,1,1,0-62.33L24.68,63.46a27.43,27.43,0,0,0,38.78,0Z" />
+                                <path class="right-e" fill="#f28c28" d="M87,24.68,75.24,12.91a44.08,44.08,0,1,1,0,62.33l50.55-50.56a27.43,27.43,0,0,0-38.78,0Z" />
+                            </g>
+                        </svg>
+
+                        <svg id="final-smile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88.15 88.15" class="w-full h-full absolute top-0 left-0">
+                             <g>
+                                <path fill="#f28c28" d="M88.09,41.8c0-.37,0-.75-.07-1.12... (Path data truncated for brevity, same as original) ..." />
+                                <path fill="#f28c28" d="M88.09,41.8c0-.37,0-.75-.07-1.12a40.05,40.05,0,0,0-.49-4c0-.35-.12-.7-.19-1.05s-.13-.69-.21-1A40.09,40.09,0,0,0,86,30.5c-.11-.33-.22-.67-.34-1s-.24-.67-.37-1-.25-.67-.39-1c-.27-.66-.55-1.32-.86-2-.1-.22-.2-.45-.32-.67s-.26-.54-.39-.81q-1-2-2.2-3.82l-.53-.79-.56-.81c-.57-.81-1.17-1.6-1.8-2.36l-.55-.66c-.29-.35-.59-.7-.91-1s-.51-.56-.77-.83-.52-.55-.79-.82c-.5-.5-1-1-1.53-1.46l-.79-.7a41.77,41.77,0,0,0-3.39-2.66l-.81-.56A43.31,43.31,0,0,0,64.11,4.8c-.27-.13-.54-.27-.81-.39s-.45-.22-.67-.32c-.65-.31-1.31-.59-2-.86-.33-.14-.66-.27-1-.39l-1-.37-1-.34c-.68-.22-1.36-.42-2-.6l-.88-.23C54,1.11,53.22.94,52.46.8l-1-.18-1-.16C49.8.37,49.2.29,48.59.23L47.47.13,46.35.06C45.6,0,44.84,0,44.08,0s-1.52,0-2.27.06L40.69.13l-1.12.1c-1,.1-1.91.23-2.86.39L35.66.81c-.39.07-.79.15-1.18.24l-.89.21-1,.27q-1,.27-2,.6l-1,.34-1,.37c-.33.12-.67.25-1,.39-.66.27-1.32.55-2,.86-.22.1-.44.2-.67.32s-.54.26-.81.39c-1.31.68-2.59,1.41-3.82,2.21l-.79.52-.81.56A44.24,44.24,0,0,0,8.09,18.62l-.56.81c-.18.26-.35.52-.52.79A43.62,43.62,0,0,0,4.8,24c-.13.27-.27.54-.39.81s-.22.45-.32.67c-.31.65-.59,1.31-.86,2-.14.33-.27.66-.39,1s-.25.67-.37,1-.23.68-.34,1c-.22.68-.42,1.36-.6,2-.08.29-.16.58-.23.88-.19.75-.36,1.5-.5,2.26l-.18,1c-.06.34-.11.69-.16,1C.37,38.35.29,39,.23,39.56c0,.37-.07.75-.1,1.12s0,.75-.07,1.12C0,42.55,0,43.31,0,44.07s0,1.52.06,2.27c0,.37,0,.75.07,1.12s.06.75.1,1.12c.06.61.14,1.22.23,1.82,0,.34.1.67.15,1a.2.2,0,0,0,0,.09c0,.27.09.55.15.82s.08.48.13.71.13.6.2.9q.18.86.42,1.68c.09.34.19.69.29,1l.3,1a.24.24,0,0,1,0,.08c.11.31.22.63.32,1l0,0,.36,1c.13.37.28.73.43,1.08s.24.61.38.91.29.66.44,1,.17.37.26.55.3.63.46.94c0,0,0,0,0,0l.49.92c.17.32.34.63.52.93l.5.85c.24.4.48.79.73,1.17s.3.46.46.68.37.56.57.83l.09.13c.18.26.37.52.57.77s.42.57.64.84c.44.56.89,1.11,1.35,1.64.23.26.46.53.7.79.47.52,1,1,1.46,1.53.27.27.54.54.82.79l.83.77c.34.32.69.62,1,.91l.66.55c.76.63,1.55,1.23,2.36,1.8l.81.56.79.53c1.23.79,2.51,1.52,3.82,2.2.27.13.54.27.81.39s.45.22.67.32c.65.31,1.31.59,2,.86.33.14.66.27-1,.39l1,.37,1,.34c1,.33,2,.62,3.08.87.34.09.69.17,1,.24.69.15,1.39.29,2.09.4,1.31.23,2.64.39,4,.49l1.12.07c.75,0,1.51.06,2.27.06A44.07,44.07,0,0,0,88.15,44.07C88.15,43.31,88.13,42.55,88.09,41.8Zm-44,29.69c-.47,0-.94,0-1.41,0s-.81,0-1.22-.09-.54,0-.81-.09l-.72-.1h-.09q-.59-.09-1.17-.21c-.37-.07-.74-.15-1.11-.25s-.84-.21-1.26-.33h0c-.42-.13-.84-.26-1.25-.41s-.84-.3-1.25-.47-.67-.28-1-.43-.57-.26-.85-.41a9.51,9.51,0,0,1-.9-.46c-.39-.2-.77-.42-1.15-.66s-.75-.46-1.11-.71-.73-.5-1.08-.77a27.56,27.56,0,0,1-6.33-6.64c-.25-.36-.49-.73-.71-1.11s-.46-.76-.66-1.15-.42-.78-.61-1.18a23.56,23.56,0,0,1-1-2.26l-.12-.33c-.09-.24-.17-.48-.25-.72L17.82,52c0-.13-.08-.26-.11-.39s-.16-.55-.23-.83-.14-.58-.19-.87a2.33,2.33,0,0,1-.08-.36c-.09-.4-.16-.81-.22-1.21a.28.28,0,0,1,0-.09c0-.26-.08-.51-.1-.77s-.07-.5-.09-.76-.07-.81-.09-1.22,0-.94,0-1.41H71.5A27.42,27.42,0,0,1,44.08,71.49Z"/>
+                                <ellipse fill="#ce7220" cx="60.62" cy="24.79" rx="5.54" ry="7.91" class="cls-2" />
+                                <ellipse fill="#ce7220" cx="27.7" cy="24.79" rx="5.54" ry="7.91" class="cls-2" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="reflection" class="py-24 md:py-32 px-6 md:px-12 bg-[#2C241F] text-[#FDFBF7]">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+            <div class="md:col-span-4 reveal-text">
+                <div class="bg-[#3a322d] p-8 rounded-2xl border border-white/5 shadow-2xl">
+                    <div class="w-full aspect-square rounded-xl overflow-hidden bg-gray-800 mb-6 relative img-container">
+                        <img src="assets/israr3.webp" alt="Israr Ahmed Portrait" loading="lazy" class="smart-img grayscale hover:grayscale-0 transition duration-500 z-10" onerror="this.style.opacity='0'">
+                    </div>
+
+                    <h3 class="text-white text-2xl font-bold font-display tracking-wide mb-1">ISRAR AHMED</h3>
+                    <p class="text-brand-saffron font-bold text-xs uppercase tracking-widest mb-6">Strategic Brand Designer</p>
+
+                    <div class="space-y-3 text-sm text-gray-300 font-light border-t border-white/10 pt-6">
+                        <a href="https://linktr.ee/israr._.ahmed" aria-label="LinkTree" class="flex items-center gap-3 hover:text-brand-saffron transition duration-300 group">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-saffron"></span> LinkTree: linktr.ee/israr._.ahmed
+                        </a>
+                        <a href="mailto:i.israr.ahmed08@gmail.com" aria-label="Email Address" class="flex items-center gap-3 hover:text-brand-saffron transition duration-300 group">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-saffron"></span> Email: i.israr.ahmed08@gmail.com
+                        </a>
+                        <a href="tel:+919111527232" aria-label="Phone Number" class="flex items-center gap-3 hover:text-brand-saffron transition duration-300 group">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-saffron"></span> Contact: +91 9111527232
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-8 reveal-text md:pl-10 md:border-l border-white/10">
+                <div class="mb-16">
+                    <h4 class="text-xs font-bold text-gray-500 mb-6 uppercase tracking-[0.2em]">Founder's Note</h4>
+                    <blockquote class="text-2xl md:text-4xl font-light leading-relaxed text-gray-100 font-display">
+                        "The logo's solid, bold shape aligned perfectly with what we needed—simple, memorable, meaningful."
+                    </blockquote>
+                </div>
+                <div class="bg-white/5 p-10 rounded-2xl border border-white/10 hover:bg-white/10 transition duration-500">
+                    <h4 class="font-bold text-brand-saffron mb-4 text-sm uppercase tracking-wide flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-brand-saffron"></span> Designer's Reflection
+                    </h4>
+                    <p class="opacity-80 leading-relaxed text-base text-gray-300">
+                        "It was my first design project. Completed as a self-taught designer. But the strategic thinking delivered real results."
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto text-center mt-24 pt-10 border-t border-white/5 text-xs text-gray-600 uppercase tracking-widest">
+            © 2025 Israr Ahmed. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Using gsap.context() for better garbage collection and safety
+            let ctx = gsap.context(() => {
+
+                // 1. HERO ANIMATION
+                gsap.from(".hero-stagger", {
+                    y: 50, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 0.2, autoAlpha: 0
+                });
+                
+                // Visible immediately on load, then parallax
+                gsap.set(".reveal-text, .reveal-image, .reveal-card", { autoAlpha: 0 }); 
+
+                gsap.to(".hero-bg", {
+                    yPercent: 20, ease: "none",
+                    scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: true }
+                });
+
+                // 2. TEXT REVEAL
+                gsap.utils.toArray('.reveal-text').forEach(element => {
+                    gsap.fromTo(element, { y: 50, autoAlpha: 0 }, {
+                        y: 0, autoAlpha: 1, duration: 1, ease: "power3.out",
+                        scrollTrigger: { trigger: element, start: "top 85%" }
+                    });
+                });
+
+                // 3. IMAGE REVEAL
+                gsap.utils.toArray('.reveal-image').forEach(element => {
+                    gsap.fromTo(element, { scale: 0.95, autoAlpha: 0 }, {
+                        scale: 1, autoAlpha: 1, duration: 1.2, ease: "power2.out",
+                        scrollTrigger: { trigger: element, start: "top 80%" }
+                    });
+                });
+
+                // 4. CARD STAGGER
+                const cardSections = document.querySelectorAll('#concept, #system');
+                cardSections.forEach(section => {
+                    const cards = section.querySelectorAll('.reveal-card');
+                    gsap.fromTo(cards, { y: 60, autoAlpha: 0 }, {
+                        y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.2)",
+                        scrollTrigger: { trigger: section, start: "top 75%" }
+                    });
+                });
+
+                // 5. PARALLAX
+                gsap.utils.toArray('.parallax-img').forEach(img => {
+                    gsap.to(img, {
+                        yPercent: 15, ease: "none",
+                        scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true }
+                    });
+                });
+
+                // 6. LOGO LOOP ANIMATION
+                const logoTimeline = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+                logoTimeline.to(".logo-path", { strokeDashoffset: 0, duration: 2, ease: "power2.inOut" })
+                    .to(".logo-path", { fill: "#f28c28", stroke: "transparent", duration: 0.8, ease: "power1.in" }, "-=0.5")
+                    .to(".logo-path", { opacity: 0, duration: 0.5, delay: 2 }); 
+
+                // 7. SMILE LOOP ANIMATION (Responsive Update)
+                const smileTimeline = gsap.timeline({
+                    repeat: -1,
+                    repeatDelay: 1.5,
+                    scrollTrigger: { trigger: "#smile-container", start: "top 70%" }
+                });
+
+                // Updated to use xPercent instead of fixed pixels for responsiveness
+                smileTimeline.to(".right-e", { opacity: 0, xPercent: 20, duration: 0.5 })
+                    .to(".left-e", {
+                        xPercent: 120, yPercent: 70, rotation: 45, // Responsive movement
+                        transformOrigin: "center", scale: 1.5, duration: 1.5, ease: "power2.inOut"
+                    }, "-=0.3")
+                    .to(".left-e", { opacity: 0, duration: 0.5 }, "-=0.5")
+                    .to("#final-smile", {
+                        opacity: 1, scale: 1.8, duration: 0.8, ease: "back.out(1.5)"
+                    }, "-=0.5")
+                    .to(".cls-2", { opacity: 1, y: 0, scale: 1, stagger: 0.2, duration: 0.5, ease: "back.out(2)" }, "-=0.2")
+                    .to(["#final-smile", ".right-e"], { opacity: 0, duration: 0.5, delay: 2 })
+                    .set(".left-e", { clearProps: "all" })
+                    .set(".right-e", { opacity: 1, xPercent: 0 })
+                    .set("#final-smile", { opacity: 0 });
+
+                // 8. NUMBER COUNTER
+                let counterAnimated = false;
+                ScrollTrigger.create({
+                    trigger: "#counter",
+                    start: "top 85%",
+                    onEnter: () => {
+                        if (!counterAnimated) {
+                            counterAnimated = true;
+                            gsap.to("#counter", {
+                                innerHTML: 60, duration: 2, snap: { innerHTML: 1 }, ease: "power2.out"
+                            });
+                        }
+                    }
+                });
+
+                // 9. LINE GRAPH ANIMATION
+                const graphTl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+                graphTl.fromTo(".graph-line", { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 2, ease: "power2.out" })
+                    .to(".graph-line", { opacity: 0, duration: 0.5, delay: 2 });
+
+            }); // End gsap.context
+        });
+    </script>
+</body>
+</html>
